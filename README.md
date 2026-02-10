@@ -94,4 +94,4 @@ ExperimentalResults/
 > `python run.py`
 
 
-**If the paper is accepted, we plan to release a more comprehensive artifact, including additional datasets and code. If you encounter any difficulties, please don't hesitate to reach out for assistance. Thank you sincerely for your interest, time and patience.**
+**Due to size constraints of the anonymous repository, we provide only processed features and trained models that are sufficient to reproduce all reported results. Upon acceptance, we will release a more complete artifact. If you encounter any difficulties, please don't hesitate to reach out for assistance. Thank you sincerely for your interest, time and patience.**
