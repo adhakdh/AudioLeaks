@@ -2,7 +2,7 @@
 
 The files in this repository are for the paper: **AudioLeaks**.
 
-We have released sanitized raw data and execution scripts that can reproduce the quantitative results reported in the paper, supporting independent verification of our findings while preserving security. In addition, by replacing the provided sanitized traces with new raw data following the same format, this artifact can also serve as a mini attack prototype. The paper presents the technical principles, workflow, and implementation details of our approach in detail. During the Artifact Evaluation stage, we will provide reviewers with more complete and sensitive artifacts under the appropriate review framework. Thank you for your time and consideration.
+We have released sanitized raw data and execution scripts that can reproduce the quantitative results reported in the paper, supporting independent verification of our findings while preserving security. Due to storage limitations, this repository currently includes a representative subset of the datasets, including those for the main experiments, while the remaining experiments are accompanied by the corresponding execution scripts and reference outputs. In addition, by replacing the provided sanitized traces with new raw data following the same format, this artifact can also serve as a mini attack prototype. The paper presents the technical principles, workflow, and implementation details of our approach in detail. During the Artifact Evaluation stage, we will provide reviewers with more complete and sensitive artifacts under the appropriate review framework. Thank you for your time and consideration.
 
 ## Artifact Packages
 
