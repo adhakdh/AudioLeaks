@@ -1,97 +1,119 @@
 # AudioLeaks
 
-This repository contains the artifacts for the paper **AudioLeaks**.
+The files in this repository are for the paper: **AudioLeaks**.
 
-To support reproducibility while respecting privacy and ethical considerations, we provide three compressed data packages as described below.
+We have released sanitized raw data and execution scripts that can reproduce the quantitative results reported in the paper, supporting independent verification of our findings while preserving security. In addition, by replacing the provided sanitized traces with new raw data following the same format, this artifact can also serve as a mini attack prototype. The paper presents the technical principles, workflow, and implementation details of our approach in detail. During the Artifact Evaluation stage, we will provide reviewers with more complete and sensitive artifacts under the appropriate review framework. Thank you for your time and consideration.
 
-## Repository Overview
+## Artifact Packages
 
-We release the following three packages:
+We provide the following three compressed data packages:
 
-1. **ExperimentalResults**  
-   This package contains the data sources for all experimental scenarios presented in the paper, including processed features and trained models.  
-   For each scenario, running `python run.py` reproduces the structured results reported in the paper.
+1. **Datasets**  
+   This package includes the datasets for each scenario evaluated in the paper.
 
-2. **SourceCode**  
-   This package provides the source code for the technical approach described in the paper, including data processing pipelines.  
-   By replacing the dataset with the corresponding scenario dataset and executing `python run.py`, users can reproduce the data processing results reported in the paper.
+2. **ExperimentalResults**  
+   This package contains the data sources and execution scripts for all scenarios presented in the paper. For each scenario, users can run the corresponding scripts to obtain the structured result presentation shown in the paper.
 
-3. **Datasets**  
-   This package contains the datasets associated with each scenario evaluated in the paper.
+3. **SourceCode**  
+   This package provides the source code and executable components for the technical approach described in the paper. Some components are provided in compiled form to reduce the risk of misuse while preserving the ability to reproduce the reported results.
 
----
+## Detailed Explanation of the `ExperimentalResults` Package
 
-## ExperimentalResults Package
+The directory structure of the **ExperimentalResults** package is as follows:
 
-Below we provide a detailed description of the **ExperimentalResults** package.  
-The directory structure is organized according to the paper sections and scenarios.
-
-```
-ExperimentalResults/
-├──requirements.txt
-├──Result.xlsx
-├── 5 Scenario 1 Inferring Application Contexts
-│   ├── 5.1 Identifying Active XR Applications
-│   │   ├── classifier_resnet18.pth
-│   │   ├── run.py
-│   │   └── tmp_mel_split
-│   └── 5.2 Revealing In-Application State
-│       ├── classifier_resnet18.pth
-│       ├── run.py
-│       └── tmp_mel_split
-├── 6 Scenario 2 Inferring XR Spatial Position
-│   ├── 6.1 Virtual space
-│   │   ├── classifier_resnet18.pth
-│   │   ├── run.py
-│   │   └── tmp_mel_split
-│   └── 6.2 Physical space
-│       ├── classifier_resnet18.pth
-│       ├── run.py
-│       └── tmp_mel_split
-├── 7 Scenario 3 Inferring XR Virtual Meetings
-│   └── 7.1 Game chat
-│       ├── classifier_resnet18.pth
-│       ├── run.py
-│       └── tmp_mel_split
-├── 8 Practical Impact Factors and Generalization
-│   ├── 8.1 Practical Impact Factors
-│   │   ├── (1) Impact of Ambient Noise
-│   │   ├── (2) Impact of Playback Volume
-│   │   ├── (3) Impact of User Movement
-│   │   ├── (4) Impact of Different Users
-│   │   ├── (5) Impact of Cross-Session
-│   │   ├── classifier_resnet18.pth
-│   │   └── run.py
-│   └── 8.2 Generality Across XR Platforms
-│       ├── htc
-│       │   ├── classifier_resnet18.pth
-│       │   ├── run.py
-│       │   └── tmp_mel_split
-│       ├── pico4
-│       │   ├── classifier_resnet18.pth
-│       │   ├── run.py
-│       │   └── tmp_mel_split
-│       ├── quest2
-│       │   ├── classifier_resnet18.pth
-│       │   ├── run.py
-│       │   └── tmp_mel_split
-│       └── quest3
-│           ├── classifier_resnet18.pth
-│           ├── run.py
-│           └── tmp_mel_split
-└── 9 Defenses
-    ├── classifier_resnet18.pth
-    ├── run.py
-    └── tmp_mel_split
+```text
+├── V-B/
+│   ├── robust_factors/
+│   ├── single_split_checkpoints/
+│   ├── test_with_noise/
+│   ├── run0_dataset.py
+│   ├── run1_V-B.py
+│   ├── run2_V-D.py
+│   └── run3_VI-ABC.py
+├── V-C/
+│   ├── cross_fold/
+│   ├── cross_protocol_checkpoints/
+│   ├── run0_dataset.py
+│   └── run1_V-C.py
+├── V-E/
+│   ├── openset_6known_2unknown_checkpoints/
+│   └── run1_V-E.py
+├── VI-D/
+│   ├── trained_models/
+│   ├── model.pyc
+│   └── run1_VI-D.py
+├── VII/
+│   ├── cross_fold/
+│   ├── cross_protocol_checkpoints/
+│   ├── crossdevice/
+│   ├── run0_dataset.py
+│   └── run1_VII.py
+├── VIII/
+│   ├── cross_fold/
+│   ├── cross_protocol_checkpoints/
+│   ├── run0_dataset.py
+│   └── run1_VIII.py
+├── lib.pyc
+├── requirements.txt
+└── result.xlsx
 ```
 
-**Step 1.** In the first-level directory, the `requirements.txt` file lists all the libraries required for this folder. To install the dependencies, execute the following command (My Python version 3.9.11):
-> `pip install -r requirements.txt `
+## Usage Instructions
 
-**Step 2.** The `Result.xlsx` file provides the data presented in each scenario of the paper, serving as a reference outline for readers. 
+**Step 1. Install dependencies.**
 
-**Step 3.** For each scenario (paper section), the folder contains 'tmp_mel_split', which is the corresponding dataset, "classifier_resnet18.pth" is the trained model. In addition, running these  `run.py`  allows you to obtain the results, consistent with those provided in `Result.xlsx` and in the paper. The corresponding commands are as follows:
-> `python run.py`
+In the first-level directory, the `requirements.txt` file lists all libraries required for running this package. We used Python 3.9.11 in our experiments. To install the dependencies, run:
 
+```bash
+pip install -r requirements.txt
+```
 
-**Due to size constraints of the anonymous repository, we provide only processed features and trained models that are sufficient to reproduce all reported results. Upon acceptance, we will release a more complete artifact. If you encounter any difficulties, please don't hesitate to reach out for assistance. Thank you sincerely for your interest, time and patience.**
+**Step 2. Check the reference results.**
+
+The `result.xlsx` file provides the quantitative results presented in each scenario of the paper. It serves as a reference outline for readers to compare with the outputs generated by the scripts.
+
+**Step 3. Understand the library file.**
+
+The `lib.pyc` file contains the required library functions used by the evaluation scripts. Some implementation components are provided in compiled form to support reproducibility while reducing the risk of misuse.
+
+**Step 4. Reproduce each scenario.**
+
+For scenarios that include `run0_dataset.py`, first run this script to split the dataset into `train`, `val`, and `test` subsets. Then run the corresponding evaluation script to obtain the structured result presentation shown in the paper.
+
+```text
+V-B/run1_V-B.py        -- V-B. Overall Performance
+V-C/run1_V-C.py        -- V-C. Generalization Across Sessions, Days, and Users
+V-B/run2_V-D.py        -- V-D. Time-to-Decision
+V-E/run1_V-E.py        -- V-E. Open-Set Recognition
+V-B/run3_VI-ABC.py     -- VI-A, VI-B, and VI-C
+VI-D/run1_VI-D.py      -- VI-D. Classifier Choice
+VII/run1_VII.py        -- VII. Cross-Platform Leakage Validation
+VIII/run1_VIII.py      -- VIII. Leakage Boundary Exploration and Appendix C. Additional Leakage Boundary Cases
+```
+
+For example, to reproduce the results for Section V-B:
+
+```bash
+cd V-B
+python run0_dataset.py
+python run1_V-B.py
+```
+
+For a scenario without `run0_dataset.py`, directly run the corresponding evaluation script. For example:
+
+```bash
+cd VI-D
+python run1_VI-D.py
+```
+
+## Security Considerations
+
+The released artifacts are designed to support reproducibility and independent verification while minimizing potential security risks. The raw data included in this repository have been sanitized to remove sensitive information. Some implementation components are provided in compiled form rather than as full original source code, because unrestricted release of sensitive attack implementation details could facilitate misuse and create practical risks.
+
+During the Artifact Evaluation stage, we will provide reviewers with more complete and sensitive artifacts under the appropriate review framework.
+
+## Contact
+
+If you encounter any difficulties, please do not hesitate to reach out for assistance.
+
+Thank you sincerely for your interest, time, and patience.

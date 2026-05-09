@@ -1,0 +1,6 @@
+{
+  "appidentity": {
+    "best_val_acc": 0.9319916724496877,
+    "summary_file": "/home/comp/csflhe/RenderLeaks/5.2/single_split_checkpoints/appidentity/appidentity_summary.json"
+  }
+}
